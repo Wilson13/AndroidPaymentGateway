@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wilsonow.paymentgateway.MainActivity"
+    android:background="@color/whiteBackground">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/material_height_toolbar"
+        android:windowActionBarOverlay="true"
+        android:background="@color/colorPrimary"
+        android:elevation="@dimen/elevation_toolbar"
+        android:padding="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        tools:ignore="Overdraw">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:text="Payment"
+                android:textSize="22sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+    <!--<android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/prl_iv_card"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="90%"
+            app:layout_heightPercent="40%"
+            android:src="@drawable/visa_credit_card" />
+    </android.support.percent.PercentRelativeLayout>-->
+    <RelativeLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/prl_iv_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="100%"
+                android:src="@drawable/credit_cards" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_card_number"
+            android:layout_below="@+id/prl_iv_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Card Number"
+            android:textSize="14sp"
+            android:textColor="@color/textBlackSolid" />
+        <View
+            android:id="@+id/v_1"
+            android:layout_below="@+id/tv_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/colorErrorSolid"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/et_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/v_1"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="0dp"
+            android:paddingTop="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/textBlack"
+            android:background="@color/white"
+            android:inputType="datetime"
+            android:hint="0000 0000 0000 0000" />
+
+        <View
+            android:id="@+id/v_2"
+            android:layout_below="@+id/et_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/colorErrorSolid"
+            android:visibility="invisible" />
+
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/prl_card_exp"
+            android:layout_below="@+id/v_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_card_exp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="50%"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="2.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_card_exp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Expiry Date"
+                    android:textSize="14sp"
+                    android:textColor="@color/textBlackSolid" />
+
+                <View
+                    android:id="@+id/v_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorErrorSolid"
+                    android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/et_card_exp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textBlack"
+                    android:background="@color/white"
+                    android:paddingTop="10dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="10dp"
+                    android:inputType="datetime"
+                    android:maxLength="5"
+                    android:hint="MM/YY" />
+                <View
+                    android:id="@+id/v_4"
+                    android:layout_below="@+id/et_card_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorErrorSolid"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_card_cvc"
+                android:layout_toRightOf="@+id/ll_card_exp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="50%"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_card_cvc"
+                    android:layout_below="@+id/iv_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="CVC"
+                    android:textSize="14sp"
+                    android:textColor="@color/textBlackSolid" />
+
+                <View
+                    android:id="@+id/v_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorErrorSolid"
+                    android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/et_card_cvc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textBlack"
+                    android:background="@color/white"
+                    android:paddingTop="10dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="10dp"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:hint="123" />
+                <View
+                    android:id="@+id/v_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorErrorSolid"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/prl_btn_submit"
+            android:layout_below="@+id/prl_card_exp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="70%"
+                android:layout_centerHorizontal="true"
+                android:text="PAY $80" />
+            <TextView
+                android:layout_below="@+id/btn_submit"
+                android:id="@+id/tv_purchased"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                app:layout_widthPercent="70%"
+                android:gravity="center"
+                android:elevation="2dp"
+                android:layout_centerHorizontal="true"
+                android:text="Verifying"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@color/colorPurchased"
+                android:visibility="gone" />
+
+        </android.support.percent.PercentRelativeLayout>
+        </RelativeLayout>
+</RelativeLayout>
