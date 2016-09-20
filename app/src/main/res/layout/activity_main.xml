@@ -14,19 +14,46 @@
         android:layout_height="@dimen/material_height_toolbar"
         android:windowActionBarOverlay="true"
         android:background="@color/colorPrimary"
+        android:elevation="@dimen/elevation_toolbar"
         android:padding="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetStart="0dp"
         tools:ignore="Overdraw">
 
-        </android.support.v7.widget.Toolbar>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginLeft="18dp"
+            android:text="Payment"
+            android:textSize="22sp" />
 
-    <TextView
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--<android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/prl_iv_card"
         android:layout_below="@+id/toolbar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Hello World!" />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="90%"
+            app:layout_heightPercent="40%"
+            android:src="@drawable/visa_credit_card" />
+    </android.support.percent.PercentRelativeLayout>-->
 </RelativeLayout>

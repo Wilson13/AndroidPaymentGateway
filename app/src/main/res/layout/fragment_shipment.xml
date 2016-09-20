@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/whiteBackground"
+    android:padding="10dp">
+
+    <!--<RelativeLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/prl_iv_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_heightPercent="25%"
+                android:src="@drawable/creditcard" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/prl_supported_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prl_iv_card"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="100%"
+                android:src="@drawable/credit_cards" />
+        </android.support.percent.PercentRelativeLayout>
+-->
+    <android.support.percent.PercentRelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/prl_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_country"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="49.5%"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:text="Country"
+            android:textSize="14sp"
+            android:textColor="@color/textBlackSolid" />
+
+        <EditText
+            android:id="@+id/et_country_add"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="49.5%"
+            android:layout_below="@+id/tv_country"
+            android:layout_marginBottom="5dp"
+            android:paddingTop="7dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/textBlack"
+            android:background="@color/white"
+            android:inputType="datetime"
+            android:hint="SINGAPORE"
+            android:maxLength="19" />
+
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_alignParentRight="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="49.5%"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:text="State"
+            android:textSize="14sp"
+            android:textColor="@color/textBlackSolid" />
+
+        <EditText
+            android:id="@+id/et_state_add"
+            android:layout_below="@+id/tv_state"
+            android:layout_alignParentRight="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="49.5%"
+            android:layout_marginBottom="5dp"
+            android:paddingTop="7dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/textBlack"
+            android:background="@color/white"
+            android:inputType="datetime"
+            android:hint="SERANGOON"
+            android:maxLength="19" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/prl_bill_add"
+            android:layout_below="@+id/prl_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="50%"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="City"
+                android:textSize="14sp"
+                android:textColor="@color/textBlackSolid" />
+
+            <EditText
+                android:id="@+id/et_city_add"
+                android:layout_below="@+id/tv_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="50%"
+                android:textColor="@color/textBlack"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"
+                android:paddingTop="7dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="7dp"
+                android:inputType="datetime"
+                android:maxLength="5"
+                android:hint="SERANGOON" />
+
+            <TextView
+                android:id="@+id/tv_zip_add"
+                android:layout_toRightOf="@+id/tv_city"
+                android:layout_toEndOf="@+id/tv_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Zip/Postal Code"
+                android:textSize="14sp"
+                android:textColor="@color/textBlackSolid" />
+
+            <EditText
+                android:id="@+id/et_zip_add"
+                android:layout_below="@+id/tv_zip_add"
+                android:layout_toRightOf="@+id/et_city_add"
+                android:layout_toEndOf="@+id/et_city_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="50%"
+                android:textColor="@color/textBlack"
+                android:background="@color/white"
+                android:paddingTop="7dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="7dp"
+                android:inputType="number"
+                android:maxLength="3"
+                android:hint="S554809" />
+
+            <TextView
+                android:id="@+id/tv_street_add"
+                android:layout_below="@+id/et_zip_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Street"
+                android:textSize="14sp"
+                android:textColor="@color/textBlackSolid" />
+
+            <EditText
+                android:id="@+id/et_street_add"
+                android:layout_below="@+id/tv_street_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="100%"
+                android:textColor="@color/textBlack"
+                android:background="@color/white"
+                android:paddingTop="7dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="7dp"
+                android:inputType="number"
+                android:maxLength="3"
+                android:hint="S554809" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/prl_btn_proceed"
+            android:layout_below="@+id/prl_bill_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn_proceed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="70%"
+                android:layout_centerInParent="true"
+                android:theme="@style/ShipmentTheme"
+                android:text="Next" />
+        </android.support.percent.PercentRelativeLayout>
+</RelativeLayout>
