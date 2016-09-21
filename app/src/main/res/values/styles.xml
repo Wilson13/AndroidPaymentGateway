@@ -11,7 +11,7 @@
     </style>
 
     <style name="dialogBackground" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:background">@color/colorPurchased</item>
+        <item name="android:background">@color/whiteBackground</item>
     </style>
 
     <style name="ShipmentTheme" parent="Theme.AppCompat.Light.Dialog.Alert">

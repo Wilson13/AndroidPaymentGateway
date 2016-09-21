@@ -26,6 +26,11 @@ import com.wilsonow.paymentgateway.R;
 
 public class PaymentFragment extends Fragment implements View.OnClickListener {
 
+    public interface PaymentInterface{
+        void onPaymentInfoPass();
+    }
+
+    private PaymentInterface paymentInterface;
     private Card card;
     private String cardNumber, cardCVC;
 
@@ -59,18 +64,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-
-        //toolbar.setNavigationIcon(android.ic_toolbar_arrow);
-        /*toolbar.setNavigationOnClickListener(
-                /*new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(AndroidToolbarExample.this, "clicking the toolbar!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-        );*/
+        paymentInterface = (PaymentInterface) context;
     }
 
     @Override
@@ -127,6 +121,9 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
                 if (card.validateCard()) {
 
+                    cardNumberEt.setEnabled(false);
+                    cardExpEt.setEnabled(false);
+                    cardCvcEt.setEnabled(false);
                     /*findViewById(R.id.tv_card_number).setVisibility(View.GONE);
                     findViewById(R.id.prl_card_exp).setVisibility(View.GONE);
                     PercentRelativeLayout prlIvCard = (PercentRelativeLayout) findViewById(R.id.prl_iv_card);
@@ -198,10 +195,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                                 card,
                                 new TokenCallback() {
                                     public void onSuccess(Token token) {
-                                        /*Toast.makeText(getBaseContext(),
-                                                "Payment successful!",
-                                                Toast.LENGTH_LONG
-                                        ).show();*/
                                         AlertDialog.Builder dialogBuilder  = new AlertDialog.Builder(getActivity(), R.style.dialogBackground)
                                                 .setTitle("Payment Succeed!")
                                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -211,6 +204,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                                                 });
 
                                         dialogBuilder.show();
+                                        paymentInterface.onPaymentInfoPass();
                                     }
                                     public void onError(Exception error) {
                                         // Show localized error message
@@ -218,6 +212,10 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                                                 error.toString(),
                                                 Toast.LENGTH_LONG
                                         ).show();
+
+                                        cardNumberEt.setEnabled(true);
+                                        cardExpEt.setEnabled(true);
+                                        cardCvcEt.setEnabled(true);
                                     }
                                 }
                         );
