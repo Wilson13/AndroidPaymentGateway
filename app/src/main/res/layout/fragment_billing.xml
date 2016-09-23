@@ -59,20 +59,20 @@
         android:layout_alignParentStart="true">
 
         <TextView
-            android:id="@+id/tv_ship_title"
+            android:id="@+id/tv_bill_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="100%"
             android:paddingLeft="5dp"
             android:paddingStart="5dp"
-            android:text="Shipping Info"
+            android:text="Billing Info"
             android:textSize="18sp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             />
 
         <TextView
-            android:id="@+id/tv_ship_name"
-            android:layout_below="@+id/tv_ship_title"
+            android:id="@+id/tv_customer_name"
+            android:layout_below="@+id/tv_bill_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="100%"
@@ -85,11 +85,11 @@
             android:textColor="@color/textBlackSolid" />
 
         <EditText
-            android:id="@+id/et_ship_name"
+            android:id="@+id/et_customer_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="100%"
-            android:layout_below="@+id/tv_ship_name"
+            android:layout_below="@+id/tv_customer_name"
             android:layout_marginBottom="5dp"
             android:paddingTop="7dp"
             android:paddingStart="5dp"
@@ -102,8 +102,8 @@
             android:maxLength="19" />
 
         <TextView
-            android:id="@+id/tv_ship_contact_no"
-            android:layout_below="@id/et_ship_name"
+            android:id="@+id/tv_contact_no"
+            android:layout_below="@id/et_customer_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="100%"
@@ -116,11 +116,11 @@
             android:textColor="@color/textBlackSolid" />
 
         <EditText
-            android:id="@+id/et_ship_contact_no"
+            android:id="@+id/et_contact_no"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="100%"
-            android:layout_below="@+id/tv_ship_contact_no"
+            android:layout_below="@+id/tv_contact_no"
             android:layout_marginBottom="5dp"
             android:paddingTop="7dp"
             android:paddingStart="5dp"
@@ -134,8 +134,8 @@
 
 
         <TextView
-            android:id="@+id/tv_ship_country"
-            android:layout_below="@id/et_ship_contact_no"
+            android:id="@+id/tv_country"
+            android:layout_below="@id/et_contact_no"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="49.5%"
@@ -148,8 +148,8 @@
             android:textColor="@color/textBlackSolid" />
 
         <EditText
-            android:id="@+id/et_ship_country"
-            android:layout_below="@+id/tv_ship_country"
+            android:id="@+id/et_country"
+            android:layout_below="@+id/tv_country"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="49.5%"
@@ -165,8 +165,8 @@
             android:maxLength="20" />
 
         <TextView
-            android:id="@+id/tv_ship_state"
-            android:layout_below="@+id/et_ship_contact_no"
+            android:id="@+id/tv_state"
+            android:layout_below="@+id/et_contact_no"
             android:layout_alignParentRight="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -180,8 +180,8 @@
             android:textColor="@color/textBlackSolid" />
 
         <EditText
-            android:id="@+id/et_ship_state"
-            android:layout_below="@+id/tv_ship_state"
+            android:id="@+id/et_state"
+            android:layout_below="@+id/tv_state"
             android:layout_alignParentRight="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -198,8 +198,8 @@
             android:maxLength="20" />
 
         <TextView
-            android:id="@+id/tv_ship_city"
-            android:layout_below="@id/et_ship_state"
+            android:id="@+id/tv_city"
+            android:layout_below="@id/et_state"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="49.5%"
@@ -212,8 +212,8 @@
             android:textColor="@color/textBlackSolid" />
 
         <EditText
-            android:id="@+id/et_ship_city"
-            android:layout_below="@+id/tv_ship_city"
+            android:id="@+id/et_city"
+            android:layout_below="@+id/tv_city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="49.5%"
@@ -229,8 +229,8 @@
             android:hint="SERANGOON" />
 
         <TextView
-            android:id="@+id/tv_ship_zip"
-            android:layout_below="@id/et_ship_state"
+            android:id="@+id/tv_zip_add"
+            android:layout_below="@id/et_state"
             android:layout_alignParentRight="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -244,8 +244,8 @@
             android:textColor="@color/textBlackSolid" />
 
         <EditText
-            android:id="@+id/et_ship_zip"
-            android:layout_below="@+id/tv_ship_zip"
+            android:id="@+id/et_zip"
+            android:layout_below="@+id/tv_zip_add"
             android:layout_alignParentRight="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -261,8 +261,8 @@
             android:hint="S554809" />
 
         <TextView
-            android:id="@+id/tv_ship_street"
-            android:layout_below="@+id/et_ship_zip"
+            android:id="@+id/tv_street_add"
+            android:layout_below="@+id/et_zip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -274,8 +274,8 @@
             android:textColor="@color/textBlackSolid" />
 
         <EditText
-            android:id="@+id/et_ship_street"
-            android:layout_below="@+id/tv_ship_street"
+            android:id="@+id/et_street"
+            android:layout_below="@+id/tv_street_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="100%"
@@ -288,15 +288,25 @@
             android:inputType="textCapCharacters"
             android:hint=" #05-03, 11 Serangoon North Ave 5" />
 
+        <CheckBox
+            android:id="@+id/cb_same_add"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/et_street"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Shipping address same as billing address"
+            />
+
         <Button
             android:id="@+id/btn_proceed"
-            android:layout_below="@id/et_ship_street"
+            android:layout_below="@id/cb_same_add"
             android:layout_centerInParent="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_widthPercent="70%"
-            android:layout_marginTop="15dp"
-            android:theme="@style/ShipmentTheme"
+            android:layout_marginTop="5dp"
+            android:theme="@style/BillingTheme"
             android:text="Next" />
 
         </android.support.percent.PercentRelativeLayout>

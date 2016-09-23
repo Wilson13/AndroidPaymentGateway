@@ -9,35 +9,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.wilsonow.paymentgateway.R;
+import com.bitwave.developer.uclearhub2.R;
 
-public class ShipmentFragment extends Fragment implements View.OnClickListener {
+public class BillingFragment extends Fragment implements View.OnClickListener {
 
-    public interface ShipmentInterface {
-        void onShipmentInfoPass(String data[]);
+    public interface BillingInterface {
+        void onBillingInfoPass(String data[], Boolean sameAdd);
     }
 
     private int errorColor, whiteColor;
     private EditText countryEt, stateEt, cityEt, zipEt, streetEt, nameEt, contactEt;
     private Button proceedBtn;
-    private ShipmentInterface shipmentInterface;
+    private CheckBox sameAddCb;
+    private BillingInterface billInterface;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View mView = inflater.inflate(R.layout.fragment_shipment, container, false);
+        View mView = inflater.inflate(R.layout.fragment_billing, container, false);
 
-        nameEt = (EditText) mView.findViewById(R.id.et_ship_name);
-        contactEt = (EditText) mView.findViewById(R.id.et_ship_contact_no);
-        countryEt = (EditText) mView.findViewById(R.id.et_ship_country);
-        stateEt = (EditText) mView.findViewById(R.id.et_ship_state);
-        cityEt = (EditText) mView.findViewById(R.id.et_ship_city);
-        zipEt = (EditText) mView.findViewById(R.id.et_ship_zip);
-        streetEt = (EditText) mView.findViewById(R.id.et_ship_street);
+        nameEt = (EditText) mView.findViewById(R.id.et_customer_name);
+        contactEt = (EditText) mView.findViewById(R.id.et_contact_no);
+        countryEt = (EditText) mView.findViewById(R.id.et_country);
+        stateEt = (EditText) mView.findViewById(R.id.et_state);
+        cityEt = (EditText) mView.findViewById(R.id.et_city);
+        zipEt = (EditText) mView.findViewById(R.id.et_zip);
+        streetEt = (EditText) mView.findViewById(R.id.et_street);
         proceedBtn = (Button) mView.findViewById(R.id.btn_proceed);
+        sameAddCb = (CheckBox) mView.findViewById(R.id.cb_same_add);
 
         nameEt.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         contactEt.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
@@ -58,7 +61,7 @@ public class ShipmentFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        shipmentInterface = (ShipmentInterface) context;
+        billInterface = (BillingInterface) context;
     }
 
     @Override
@@ -107,10 +110,16 @@ public class ShipmentFragment extends Fragment implements View.OnClickListener {
                     streetEt.setBackgroundColor(whiteColor);
 
                 if ( !countryStr.equals("") && !stateStr.equals("") && !cityStr.equals("") && !zipStr.equals("") &&!streetStr.equals("") ) {
-                    String data[] = { nameStr, contactStr, countryStr, stateStr, cityStr, zipStr, streetStr };
+                    String data[] = { nameStr, contactStr, countryStr, stateStr, cityStr, zipStr, streetStr,
+                                      nameStr, contactStr, countryStr, stateStr, cityStr, zipStr, streetStr };
 
-                    // Pass information to PaymentActivity.
-                    shipmentInterface.onShipmentInfoPass(data);
+                    if ( sameAddCb.isChecked() ) {
+                        // If shipping address is same as billing address, pass information to PaymentActivity.
+                        billInterface.onBillingInfoPass(data, true);
+                    } else {
+                        billInterface.onBillingInfoPass(data, false);
+                    }
+                    //((PaymentActivity)getActivity()).proceedPayment();
                 }
                 break;
         }

@@ -50,7 +50,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
 
         cardNumberEt = (EditText) mView.findViewById(R.id.et_card_number);
         cardExpEt = (EditText) mView.findViewById(R.id.et_card_exp);
-        cardCvcEt = (EditText) mView.findViewById(R.id.et_zip_add);
+        cardCvcEt = (EditText) mView.findViewById(R.id.et_zip);
         submitBtn = (Button) mView.findViewById(R.id.btn_submit);
 
         errorColor = ContextCompat.getColor(getActivity().getBaseContext(), R.color.colorError);
@@ -87,10 +87,10 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                                 + cardNumberEt.getText().toString().substring(12, 16);*/
                 cardCVC = cardCvcEt.getText().toString();
 
-                Toast.makeText(getActivity().getBaseContext(),
+                /*Toast.makeText(getActivity().getBaseContext(),
                         "cardNumber:" + cardNumber,
                         Toast.LENGTH_LONG
-                ).show();
+                ).show();*/
 
                 card = new Card(
                         cardNumber,
@@ -98,7 +98,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                         cardExpYear,
                         cardCVC
                 );
-                //card = new Card("4242-4242-4242-4242", 12, 2017, "123");
 
                 // Validate card input, if invalid warn user with pink-colored EditText.
                 if (!card.validateNumber()) {
@@ -124,33 +123,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                     cardNumberEt.setEnabled(false);
                     cardExpEt.setEnabled(false);
                     cardCvcEt.setEnabled(false);
-                    /*findViewById(R.id.tv_card_number).setVisibility(View.GONE);
-                    findViewById(R.id.prl_card_exp).setVisibility(View.GONE);
-                    PercentRelativeLayout prlIvCard = (PercentRelativeLayout) findViewById(R.id.prl_iv_card);
-                    findViewById(R.id.v_1).setVisibility(View.GONE);
-                    findViewById(R.id.v_2).setVisibility(View.GONE);
-                    findViewById(R.id.v_3).setVisibility(View.GONE);
-                    findViewById(R.id.v_4).setVisibility(View.GONE);
-                    findViewById(R.id.v_5).setVisibility(View.GONE);
-                    findViewById(R.id.v_6).setVisibility(View.GONE);
-                    cardNumberEt.setVisibility(View.GONE);
-                    cardExpEt.setVisibility(View.GONE);
-                    cardCvcEt.setVisibility(View.GONE);*/
-
-                    /*findViewById(R.id.btn_submit).setBackgroundColor(ContextCompat.getColor(this,R.color.colorPurchased));*/
-
-                    /*ValueAnimator anim = ValueAnimator.ofInt(findViewById(R.id.btn_submit).getMeasuredWidth(), 20);
-                    anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                        @Override
-                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            int val = (Integer) valueAnimator.getAnimatedValue();
-                            ViewGroup.LayoutParams layoutParams = findViewById(R.id.btn_submit).getLayoutParams();
-                            layoutParams.width = val;
-                            findViewById(R.id.btn_submit).setLayoutParams(layoutParams);
-                        }
-                    });
-                    anim.setDuration(2000);
-                    anim.start();*/
 
                     submitBtn.setVisibility(View.GONE);
                     final View v = getActivity().findViewById(R.id.tv_verifying);
@@ -164,15 +136,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
                     {
                         @Override
                         protected void applyTransformation(float interpolatedTime, Transformation t) {
-//                            v.getLayoutParams().height = interpolatedTime == 1
-//                                    ? LayoutParams.WRAP_CONTENT
-//                                    : (int)(targetHeight * interpolatedTime);
-//                            v.requestLayout();
-                            //int newWidth = mStartWidth;// - (int) ((mStartWidth/2) * interpolatedTime);
-                            //int newWidth = mStartWidth + (int) ((500 - mStartWidth) * interpolatedTime);
-                            //Log.i("Main", "newWidth: "+newWidth);
-                            //v.getLayoutParams().width = newWidth;
-                            //params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
                             info.widthPercent = mStartWidth - ((mStartWidth/2) * interpolatedTime);
                             v.setLayoutParams(params);
                             v.requestLayout();
@@ -230,5 +193,3 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         }
     }
 }
-
-
