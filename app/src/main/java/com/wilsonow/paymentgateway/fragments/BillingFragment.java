@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.bitwave.developer.uclearhub2.R;
+import com.wilsonow.paymentgateway.R;
 
 public class BillingFragment extends Fragment implements View.OnClickListener {
 
