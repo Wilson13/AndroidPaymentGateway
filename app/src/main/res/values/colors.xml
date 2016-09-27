@@ -11,5 +11,5 @@
     <color name="textHint">#50000000</color>
     <color name="colorError">#50FF8db3</color>
     <color name="colorErrorSolid">#FF8db3</color>
-    <color name="colorPurchased">#8BC34A</color>
+    <color name="colorGreen">#8BC34A</color>
 </resources>

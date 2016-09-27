@@ -1,3 +1,5 @@
+package com.wilsonow.paymentgateway;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
@@ -11,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.wilsonow.paymentgateway.R;
 import com.wilsonow.paymentgateway.fragments.BillingFragment;
 import com.wilsonow.paymentgateway.fragments.PaymentFragment;
 import com.wilsonow.paymentgateway.fragments.ShipmentFragment;
@@ -78,15 +79,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
             //showMessageBackToMain(getResources().getString(R.string.update_internet_connection),getResources().getString(R.string.update_internet_connection_msg) );
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getResources().getString(R.string.update_internet_connection)+getResources().getString(R.string.update_internet_connection_msg));
-            builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    PaymentActivity.this.finish();
-                }
-            });
-            builder.show();
-        } else if ( Integer.parseInt(devModelStr) != 0x000F ) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Device not supported! " + devModelStr);
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     PaymentActivity.this.finish();
@@ -214,27 +206,27 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
 
                         // POST variables to PHP file on server
                         Uri.Builder builder = new Uri.Builder()
-                            .appendQueryParameter("bluetooth_add", deviceBtAdd)
-                            .appendQueryParameter("bill_name", billNameStr)
-                            .appendQueryParameter("bill_contact_no", billContactStr)
-                            .appendQueryParameter("bill_country", billCountryStr)
-                            .appendQueryParameter("bill_state", billStateStr)
-                            .appendQueryParameter("bill_city", billCityStr)
-                            .appendQueryParameter("bill_zip", billZipStr)
-                            .appendQueryParameter("bill_street", billStreetStr)
-                            .appendQueryParameter("ship_name", shipNameStr)
-                            .appendQueryParameter("ship_contact_no", shipContactStr)
-                            .appendQueryParameter("ship_country", shipCountryStr)
-                            .appendQueryParameter("ship_state", shipStateStr)
-                            .appendQueryParameter("ship_city", shipCityStr)
-                            .appendQueryParameter("ship_zip", shipZipStr)
-                            .appendQueryParameter("ship_street", shipStreetStr);
+                                .appendQueryParameter("bluetooth_add", deviceBtAdd)
+                                .appendQueryParameter("bill_name", billNameStr)
+                                .appendQueryParameter("bill_contact_no", billContactStr)
+                                .appendQueryParameter("bill_country", billCountryStr)
+                                .appendQueryParameter("bill_state", billStateStr)
+                                .appendQueryParameter("bill_city", billCityStr)
+                                .appendQueryParameter("bill_zip", billZipStr)
+                                .appendQueryParameter("bill_street", billStreetStr)
+                                .appendQueryParameter("ship_name", shipNameStr)
+                                .appendQueryParameter("ship_contact_no", shipContactStr)
+                                .appendQueryParameter("ship_country", shipCountryStr)
+                                .appendQueryParameter("ship_state", shipStateStr)
+                                .appendQueryParameter("ship_city", shipCityStr)
+                                .appendQueryParameter("ship_zip", shipZipStr)
+                                .appendQueryParameter("ship_street", shipStreetStr);
 
                         String query = builder.build().getEncodedQuery();
 
                         OutputStream os = conn.getOutputStream();
                         BufferedWriter writer = new BufferedWriter(
-                            new OutputStreamWriter(os, "UTF-8"));
+                                new OutputStreamWriter(os, "UTF-8"));
                         writer.write(query);
                         writer.flush();
                         writer.close();

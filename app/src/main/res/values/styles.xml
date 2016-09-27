@@ -14,9 +14,18 @@
         <item name="android:background">@color/whiteBackground</item>
     </style>
 
-    <style name="ShipmentTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="BillingTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">@color/white</item>
         <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="ShipmentTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/white</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+    </style>
+
+    <style name="PaymentTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorButtonNormal">@color/colorGreen</item>
     </style>
 
 </resources>
