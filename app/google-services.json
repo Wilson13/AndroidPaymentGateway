@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1049084669230",
+    "firebase_url": "https://testfcm-88e82.firebaseio.com",
+    "project_id": "testfcm-88e82",
+    "storage_bucket": "testfcm-88e82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049084669230:android:6bd1d5f99d459aeb",
+        "android_client_info": {
+          "package_name": "com.wilsonow.paymentgateway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049084669230-9pq7u3dqgrqujajt6nq6ms5fr492s077.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wilsonow.paymentgateway",
+            "certificate_hash": "148FB57C3B7FA20BFCBC547DF33497A7F436FC67"
+          }
+        },
+        {
+          "client_id": "1049084669230-q9q3utharn87k5cp0rcon85i3nq03e5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHcebDHIqSSK4C__zCezYVWIpUaY-e3Yw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049084669230-q9q3utharn87k5cp0rcon85i3nq03e5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

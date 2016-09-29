@@ -10,25 +10,35 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.wilsonow.paymentgateway.fragments.BillingFragment;
 import com.wilsonow.paymentgateway.fragments.PaymentFragment;
 import com.wilsonow.paymentgateway.fragments.ShipmentFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class PaymentActivity extends AppCompatActivity implements PaymentFragment.PaymentInterface, BillingFragment.BillingInterface, ShipmentFragment.ShipmentInterface {
 
+    private static String TAG = "PaymentActivity";
     private String devModelStr, deviceBtAdd;
     private String billNameStr, billContactStr, billCountryStr, billStateStr, billCityStr, billZipStr, billStreetStr;
     private String shipNameStr, shipContactStr, shipCountryStr, shipStateStr, shipCityStr, shipZipStr, shipStreetStr;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +46,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
         setContentView(R.layout.activity_payment);
 
         devModelStr = getIntent().getStringExtra("devModel");
+
+        // Obtain user's location
+        determineRegion();
+
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (findViewById(R.id.fragment_container) != null) {
@@ -71,7 +85,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
         //deviceBtAdd = mGaiaLink.getBluetoothAddress();
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
+        sendFCMDataMessage();
         // De Morgan’s Theorem (A && B)' = A' + B'
         //if (networkInfo != null && networkInfo.isConnected()) {
         if (networkInfo == null || !networkInfo.isConnected()) {
@@ -97,6 +111,125 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void determineRegion() {
+        // Function to determine user's region
+        TelephonyManager mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        String countryISO = mTelephonyManager.getNetworkCountryIso() + "countryISO";
+        countryISO = countryISO.equals("") ? countryISO : "SG";
+        try {
+
+            BufferedReader bufferedReader;
+            InputStreamReader inputStreamReader = new InputStreamReader(getAssets().open("country_list.txt"));
+            bufferedReader = new BufferedReader(inputStreamReader);
+            String readLine;
+
+            while ( (readLine = bufferedReader.readLine()) != null) {
+                String userCountry = readLine.substring(3, 5);
+                /*Log.i(TAG, "country: " + userCountry);
+                Log.i(TAG, "continent: " + readLine.substring(0, 2));*/
+                if ( userCountry.equalsIgnoreCase(countryISO) ) {
+                    // If this country exists (is valid)
+                    switch ( userCountry.toUpperCase() ) {
+                        case "SG":
+                            // Obtain the FirebaseAnalytics instance
+                            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+                            mFirebaseAnalytics.setUserProperty("Region", readLine.substring(0, 2));
+                            Log.i(TAG, "country found!");
+                            break;
+                    }
+                    break; // exit while loop
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void sendFCMDataMessage() {
+
+            new AsyncTask<Void, Void, String>() {
+
+                protected String doInBackground(Void... params) {
+                    try {
+                        URL url = new URL("https://fcm.googleapis.com/fcm/send");
+                        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+                        httpConn.setRequestProperty("Content-Type", "application/json");
+                        httpConn.setRequestProperty("Authorization", "key=AIzaSyDZB86_E1LL5MzmcKk43b9La5M1aC2_Nxs");
+                        httpConn.setReadTimeout(15000);
+                        httpConn.setConnectTimeout(15000);
+                        httpConn.setRequestMethod("POST");
+                        httpConn.setDoOutput(true);
+                        httpConn.connect();
+
+                        JSONObject jObjData = new JSONObject();
+                        JSONObject jObjContent = new JSONObject();
+                        jObjContent.put("content1", "content1~~");
+                        jObjContent.put("content2", "content2~~");
+                        jObjData.put("data", jObjContent);
+                        //Log.i(TAG, jObjData.toString());
+
+                        JSONObject jObjNotification = new JSONObject();
+                        JSONObject jObjNContent = new JSONObject();
+                        jObjNContent.put("body", "5 to 1");
+                        jObjNContent.put("title", "Portugal vs. Denmark");
+                        jObjNotification.put("notification", jObjNContent);
+                        Log.i(TAG, jObjNotification.toString());
+                        /*
+                        { "notification": {
+                            "title": "Portugal vs. Denmark",
+                                    "body": "5 to 1"
+                        }*/
+
+                        OutputStream os = httpConn.getOutputStream();
+                        BufferedWriter bWriter = new BufferedWriter(
+                                new OutputStreamWriter(os, "UTF-8"));
+                        bWriter.write(URLEncoder.encode(jObjNotification.toString(), "UTF-8"));
+                        bWriter.flush();
+                        bWriter.close();
+                        os.close();
+
+                        int response = httpConn.getResponseCode();
+                        Log.i(TAG, "response: " + response);
+                        //httpConn.disconnect();
+
+                        return "Success";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                    return null;
+                }
+                @Override
+                protected void onPostExecute(String result) {
+                    if ( result.equals("Success")) {
+                        Toast.makeText(PaymentActivity.this,
+                                "Proceed to product upgrade!",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    } else {
+                        Toast.makeText(PaymentActivity.this,
+                                "Failed to connect to server, please contact technical support",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+            }.execute();
+
+
+            /*{ "data": {
+                "score": "5x1",
+                        "time": "15:10"
+            },
+                "to" : "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1..."
+            }*/
+
+            /*Uri.Builder builder = new Uri.Builder()
+                    .appendQueryParameter("bluetooth_add", deviceBtAdd)*/
+
     }
 
     public void proceedPayment() {
