@@ -14,7 +14,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.onesignal.OneSignal;
 import com.wilsonow.paymentgateway.fragments.BillingFragment;
 import com.wilsonow.paymentgateway.fragments.PaymentFragment;
 import com.wilsonow.paymentgateway.fragments.ShipmentFragment;
@@ -38,13 +38,23 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
     private String devModelStr, deviceBtAdd;
     private String billNameStr, billContactStr, billCountryStr, billStateStr, billCityStr, billZipStr, billStreetStr;
     private String shipNameStr, shipContactStr, shipCountryStr, shipStateStr, shipCityStr, shipZipStr, shipStreetStr;
-    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
+        // Initialize OneSignal
+        //  - Call inFocusDisplaying with None to disable OneSignal's in app AlertBox.
+        //  - If want to change how a notification is displayed in the notification shade
+        //    or process a silent notification when your app isn't running see our Background
+        //    Data and Notification Overriding guide.
+        OneSignalNRHandler osNRhandler = new OneSignalNRHandler(this);
+        OneSignal.startInit(this)
+            .setNotificationReceivedHandler(osNRhandler)
+            .setNotificationOpenedHandler(osNRhandler)
+            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None)
+            .init();
         devModelStr = getIntent().getStringExtra("devModel");
 
         // Obtain user's location
@@ -85,7 +95,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
         //deviceBtAdd = mGaiaLink.getBluetoothAddress();
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        sendFCMDataMessage();
+        //sendFCMDataMessage();
         // De Morgan’s Theorem (A && B)' = A' + B'
         //if (networkInfo != null && networkInfo.isConnected()) {
         if (networkInfo == null || !networkInfo.isConnected()) {
@@ -117,6 +127,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
         // Function to determine user's region
         TelephonyManager mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         String countryISO = mTelephonyManager.getNetworkCountryIso() + "countryISO";
+
+        // If no telephony services is available (no SIM card), set the default country to US.
         countryISO = countryISO.equals("") ? countryISO : "SG";
         try {
 
@@ -133,9 +145,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
                     // If this country exists (is valid)
                     switch ( userCountry.toUpperCase() ) {
                         case "SG":
-                            // Obtain the FirebaseAnalytics instance
-                            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-                            mFirebaseAnalytics.setUserProperty("Region", readLine.substring(0, 2));
+                            OneSignal.sendTag("Region", "ASIA");
                             Log.i(TAG, "country found!");
                             break;
                     }

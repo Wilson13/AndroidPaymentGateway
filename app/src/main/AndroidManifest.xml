@@ -15,18 +15,21 @@
         <activity android:name=".PaymentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service
+        <activity
+            android:name=".PromotionActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!--<service
             android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
-        </service>
-
+        </service>-->
+        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
     </application>
-
 </manifest>

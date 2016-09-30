@@ -10,6 +10,9 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [manifestApplicationId: "${applicationId}",
+                                onesignal_app_id: "84d06382-f9c4-4636-ba89-93c169d1425f",
+                                onesignal_google_project_number: "1049084669230"]
     }
     buildTypes {
         release {
@@ -25,7 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.stripe:stripe-android:+'
     compile 'com.android.support:percent:24.2.1'
-    compile 'com.google.firebase:firebase-core:9.6.1'
-    compile 'com.google.firebase:firebase-messaging:9.6.0'
+    compile 'com.onesignal:OneSignal:3.+@aar'
+
+    // Required for OneSignal, even if you have added FCM.
+    compile 'com.google.android.gms:play-services-gcm:9.6.1'
 }
-apply plugin: 'com.google.gms.google-services'
