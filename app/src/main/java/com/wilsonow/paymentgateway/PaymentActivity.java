@@ -126,8 +126,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
     private void determineRegion() {
         // Function to determine user's region
         TelephonyManager mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        String countryISO = mTelephonyManager.getNetworkCountryIso() + "countryISO";
+        String countryISO = mTelephonyManager.getNetworkCountryIso();
 
+        Log.i(TAG, "countryISO: " + countryISO);
         // If no telephony services is available (no SIM card), set the default country to US.
         countryISO = countryISO.equals("") ? countryISO : "SG";
         try {
@@ -145,7 +146,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentFragmen
                     // If this country exists (is valid)
                     switch ( userCountry.toUpperCase() ) {
                         case "SG":
-                            OneSignal.sendTag("Region", "ASIA");
+                            //OneSignal.sendTag("REGION", "ASIA");
                             Log.i(TAG, "country found!");
                             break;
                     }

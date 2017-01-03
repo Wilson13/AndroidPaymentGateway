@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.wilsonow.paymentgateway"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders = [manifestApplicationId: "${applicationId}",
+        manifestPlaceholders = [ //manifestApplicationId: "${applicationId}",
                                 onesignal_app_id: "84d06382-f9c4-4636-ba89-93c169d1425f",
                                 onesignal_google_project_number: "1049084669230"]
     }
@@ -25,11 +25,14 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.stripe:stripe-android:+'
-    compile 'com.android.support:percent:24.2.1'
-    compile 'com.onesignal:OneSignal:3.+@aar'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.stripe:stripe-android:2.0.2'
+    compile 'com.android.support:percent:25.1.0'
+    compile 'com.onesignal:OneSignal:3.4.2@aar'
 
     // Required for OneSignal, even if you have added FCM.
-    compile 'com.google.android.gms:play-services-gcm:9.6.1'
+    compile 'com.google.android.gms:play-services-gcm:10.0.1'
+
+    // Required for geotagging
+    compile "com.google.android.gms:play-services-location:10.0.1"
 }

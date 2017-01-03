@@ -29,15 +29,29 @@ public class OneSignalNRHandler extends Application implements OneSignal.Notific
         // when it is received if it is a background / silent notification.
 
         JSONObject data = notification.payload.additionalData;
-        String customKey;
+        String type, region;
 
-        Log.i(TAG, "title: " + notification.payload.title);
-        Log.i(TAG, "body: " + notification.payload.body);
+        Log.i(TAG, "1 title: " + notification.payload.title);
+        Log.i(TAG, "1 body: " + notification.payload.body);
+
+        if ( data != null )
+            Log.i(TAG, "2 data: " + data.toString());
 
         if (data != null) {
-            customKey = data.optString("Type", null);
-            //if (customKey != null)
-                //Log.i("OneSignalExample", "customkey (Type) set with value: " + customKey);
+            type = data.optString("TYPE", null);
+            region = data.optString("REGION", null);
+
+            if (type != null && type.equals("FIRMWARE")) {
+                Log.i("OneSignalExample", "type: " + type);
+                Log.i("OneSignalExample", "region: " + region);
+
+                // The following can be used to open an Activity of your choice.
+                // Replace - getApplicationContext() - with any Android Context.
+                Intent intent = new Intent(context, PromotionActivity.class);
+                intent.putExtra("REGION", region);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
         }
     }
 
@@ -47,19 +61,26 @@ public class OneSignalNRHandler extends Application implements OneSignal.Notific
 
         OSNotificationAction.ActionType actionType = result.action.type;
         JSONObject data = result.notification.payload.additionalData;
-        String customKey;
+        String type, region;
 
-        Log.i(TAG, "title: " + result.notification.payload.title);
-        Log.i(TAG, "body: " + result.notification.payload.body);
-        Log.i(TAG, "data: " + data.toString());
+        Log.i(TAG, "2 title: " + result.notification.payload.title);
+        Log.i(TAG, "2 body: " + result.notification.payload.body);
+
+        if ( data != null )
+            Log.i(TAG, "2 data: " + data.toString());
 
         if (data != null) {
-            customKey = data.optString("Type", null);
-            if (customKey != null && customKey.equals("Promotion")) {
-                Log.i("OneSignalExample", "customkey set with value: " + customKey);
+            type = data.optString("TYPE", null);
+            region = data.optString("REGION", null);
+
+            if (type != null && type.equals("FIRMWARE")) {
+                Log.i("OneSignalExample", "type: " + type);
+                Log.i("OneSignalExample", "region: " + region);
+
                 // The following can be used to open an Activity of your choice.
                 // Replace - getApplicationContext() - with any Android Context.
                 Intent intent = new Intent(context, PromotionActivity.class);
+                intent.putExtra("REGION", region);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

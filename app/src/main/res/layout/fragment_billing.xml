@@ -260,7 +260,7 @@
             android:maxLength="10"
             android:hint="S554809" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tv_street_add"
             android:layout_below="@+id/et_zip"
             android:layout_width="match_parent"
@@ -296,9 +296,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Shipping address same as billing address"
-            />
+            />-->
 
-        <Button
+       <!-- <Button
             android:id="@+id/btn_proceed"
             android:layout_below="@id/cb_same_add"
             android:layout_centerInParent="true"
@@ -307,7 +307,52 @@
             app:layout_widthPercent="70%"
             android:layout_marginTop="5dp"
             android:theme="@style/BillingTheme"
-            android:text="Next" />
+            android:text="Next" />-->
+
+        <RadioGroup
+            android:id="@+id/rg_region"
+            android:layout_below="@id/et_zip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioButton
+                android:id="@+id/rb_asia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="ASIA" />
+            <RadioButton
+                android:id="@+id/rb_eu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="EU" />
+            <RadioButton
+                android:id="@+id/rb_us"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="US" />
+            <RadioButton
+                android:id="@+id/rb_others"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="Others" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_register_region"
+            android:layout_below="@id/rg_region"
+            android:layout_centerInParent="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="70%"
+            android:layout_marginTop="5dp"
+            android:theme="@style/BillingTheme"
+            android:text="Register Region" />
 
         </android.support.percent.PercentRelativeLayout>
 </RelativeLayout>

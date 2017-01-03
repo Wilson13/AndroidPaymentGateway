@@ -21,7 +21,7 @@ import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
-import com.stripe.exception.AuthenticationException;
+import com.stripe.android.exception.AuthenticationException;
 import com.wilsonow.paymentgateway.R;
 
 public class PaymentFragment extends Fragment implements View.OnClickListener {
